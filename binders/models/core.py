@@ -5,7 +5,7 @@ from sqlalchemy import Column, Boolean, Integer, Text, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 
 
-class DocumentType(Model, AuditMixin):
+class DocumentationType(Model, AuditMixin):
     id = Column(Integer, primary_key=True)
     name = Column(Text, nullable=False, unique=True)
 
@@ -13,7 +13,7 @@ class DocumentType(Model, AuditMixin):
         return self.name
 
 
-class Document(Model, AuditMixin):
+class Documentation(Model, AuditMixin):
     id = Column(Integer, primary_key=True)
     name = Column(Text, nullable=False, unique=True)
     is_active = Column(Boolean, default=False)
@@ -21,8 +21,8 @@ class Document(Model, AuditMixin):
     updated_at = Column(DateTime, default=datetime.utcnow())
     doc_gen_script = Column(Text, nullable=False)
     doc_html_location = Column(Text, nullable=False)
-    document_type_id = Column(Integer, ForeignKey('document_type.id'), nullable=False)
-    document_type = relationship('DocumentType')
+    documentation_type_id = Column(Integer, ForeignKey('documentation_type.id'), nullable=False)
+    documentation_type = relationship('DocumentationType')
     repository_id = Column(Integer, ForeignKey('repository.id'))
 
     def __repr__(self):
@@ -57,7 +57,7 @@ class Repository(Model, AuditMixin):
     repo_owner = relationship('RepositoryOwner')
     repo_lang_id = Column(Integer, ForeignKey('repository_lang.id'), nullable=False)
     repo_lang = relationship('RepositoryLang')
-    documents = relationship('Document')
+    documentations = relationship('Documentation')
 
     def __repr__(self):
         return self.name

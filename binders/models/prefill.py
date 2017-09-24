@@ -1,6 +1,6 @@
 import logging
 from binders import db
-from binders.models.core import DocumentType
+from binders.models.core import DocumentationType
 
 
 CREATED_BY = 'prefill'
@@ -9,7 +9,7 @@ CREATED_BY = 'prefill'
 def fill_document_type():
     try:
         for t in ['swagger', 'javac', 'sphinx']:
-            db.session.add(DocumentType(name=t))
+            db.session.add(DocumentationType(name=t))
         db.session.commit()
         logging.info('Prefilled document_type table')
     except Exception as e:
@@ -20,7 +20,7 @@ def fill_document_type():
 def fill_repo_lang():
     try:
         for t in ['java', 'python', 'clojure']:
-            db.session.add(DocumentType(name=t))
+            db.session.add(DocumentationType(name=t))
         db.session.commit()
         logging.info('Prefilled repository_lang table')
     except Exception as e:

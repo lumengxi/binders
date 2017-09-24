@@ -7,7 +7,7 @@ from collections import defaultdict
 from sqlalchemy.sql.expression import true
 
 from binders import app, db
-from binders.models.core import Repository, RepositoryOwner, RepositoryLang, Document, DocumentType
+from binders.models.core import Repository, RepositoryOwner, RepositoryLang, Documentation, DocumentationType
 
 config = app.config
 logger = logging.getLogger(__name__)
@@ -15,8 +15,8 @@ logger = logging.getLogger(__name__)
 
 def get_active_repo_docs():
     active_repos = db.session\
-        .query(Repository, Document)\
-        .filter(Document.is_active == true())\
+        .query(Repository, Documentation)\
+        .filter(Documentation.is_active == true())\
         .all()
 
     repo_docs = defaultdict(list)
@@ -28,8 +28,8 @@ def get_active_repo_docs():
 
 def get_repo_doc_details():
     active_repos = db.session\
-        .query(Repository, RepositoryOwner, RepositoryLang, Document, DocumentType)\
-        .filter(Document.is_active == true())\
+        .query(Repository, RepositoryOwner, RepositoryLang, Documentation, DocumentationType)\
+        .filter(Documentation.is_active == true())\
         .all()
 
     repo_docs = defaultdict(list)

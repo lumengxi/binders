@@ -3,7 +3,7 @@ from flask_appbuilder import BaseView, ModelView, expose
 from flask_appbuilder.models.sqla.interface import SQLAInterface
 from binders import app, appbuilder, db
 
-from binders.models.core import DocumentType, RepositoryOwner, Repository, RepositoryLang, Document
+from binders.models.core import DocumentationType, RepositoryOwner, Repository, RepositoryLang, Documentation
 from binders.utils.repos import get_repo_doc_details
 
 
@@ -29,7 +29,7 @@ class Binders(BaseView):
 
 
 class DocumentTypeView(ModelView):
-    datamodel = SQLAInterface(DocumentType)
+    datamodel = SQLAInterface(DocumentationType)
     list_columns = ['name', 'created_by']
     show_columns = add_columns = edit_columns = ['name']
 
@@ -41,9 +41,9 @@ class RepositoryOwnerView(ModelView):
 
 
 class DocumentView(ModelView):
-    datamodel = SQLAInterface(Document)
-    list_columns = ['name', 'is_active', 'document_type.name', 'created_by', 'created_at', 'updated_at']
-    show_columns = add_columns = edit_columns = ['name', 'is_active', 'document_type',
+    datamodel = SQLAInterface(Documentation)
+    list_columns = ['name', 'is_active', 'documentation_type.name', 'created_by', 'created_at', 'updated_at']
+    show_columns = add_columns = edit_columns = ['name', 'is_active', 'documentation_type',
                                                  'doc_gen_script', 'doc_html_location']
 
     base_order = ('is_active', 'desc')
@@ -58,7 +58,7 @@ class RepositoryLangView(ModelView):
 class RepositoryView(ModelView):
     datamodel = SQLAInterface(Repository)
 
-    list_columns = ['name', 'updated_at', 'repo_owner', 'documents']
+    list_columns = ['name', 'updated_at', 'repo_owner', 'documentations']
 
     list_fieldsets = add_fieldsets = edit_fieldsets = [
         ('Summary',
@@ -67,12 +67,12 @@ class RepositoryView(ModelView):
           }),
         ('Documents',
          {
-             'fields': ['documents']
+             'fields': ['documentations']
          })
     ]
 
 
-class RepositoryDocumentView(BaseView):
+class RepositoryDocumentationView(BaseView):
     route_base = '/RepositoryDocumentView'
     default_view = 'repo_docs'
 
@@ -88,7 +88,7 @@ db.create_all()
 
 appbuilder.add_view_no_menu(Binders)
 
-appbuilder.add_view(RepositoryDocumentView, 'Dashboard')
+appbuilder.add_view(RepositoryDocumentationView, 'Dashboard')
 
 appbuilder.add_view(RepositoryView,
                     'Repositories',
