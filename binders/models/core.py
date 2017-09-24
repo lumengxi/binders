@@ -1,6 +1,6 @@
 from datetime import datetime
 from flask_appbuilder import Model
-from flask_appbuilder.models.mixins import AuditMixin, FileColumn, ImageColumn
+from flask_appbuilder.models.mixins import AuditMixin
 from sqlalchemy import Column, Boolean, Integer, Text, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 
