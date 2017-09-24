@@ -56,3 +56,12 @@ CELERY_RESULT_BACKEND = 'db+sqlite:///' + os.path.join(BASE_DIR, 'celery_results
 CELERY_BROKER_URL = 'sqla+sqlite:///' + os.path.join(BASE_DIR, 'celery.db')
 
 REPO_LOCAL_BASEDIR = os.path.join(BASE_DIR, 'repos')
+
+
+# ---------------------------------------------------
+# Import local config
+# ---------------------------------------------------
+try:
+    from local_config import *  # noqa
+except:
+    pass

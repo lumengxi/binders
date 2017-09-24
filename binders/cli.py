@@ -23,10 +23,10 @@ manager = Manager(app)
     default=config.get("FLASK_USE_RELOAD"),
     help="Don't use the reloader in debug mode")
 @manager.option(
-    '-a', '--address', default=config.get("GREENSHIFT_WEBSERVER_ADDRESS"),
+    '-a', '--address', default=config.get("BINDERS_WEBSERVER_ADDRESS"),
     help="Specify the address to which to bind the web server")
 @manager.option(
-    '-p', '--port', default=config.get("GREENSHIFT_WEBSERVER_PORT"),
+    '-p', '--port', default=config.get("BINDERS_WEBSERVER_PORT"),
     help="Specify the port on which to run the web server")
 def runserver(debug, no_reload, address, port):
     """Starts a Superset web server."""
@@ -41,7 +41,7 @@ def runserver(debug, no_reload, address, port):
         print(Style.RESET_ALL)
         app.run(
             host='0.0.0.0',
-            port=int(port),
+            port=int(port or 8080),
             threaded=False,
             debug=True,
             use_reloader=no_reload)
