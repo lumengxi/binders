@@ -1,0 +1,10 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import warnings
+from flask.exthook import ExtDeprecationWarning
+warnings.simplefilter('ignore', ExtDeprecationWarning)
+
+from binders.cli import manager  # noqa
+
+if __name__ == "__main__":
+    manager.run()

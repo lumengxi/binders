@@ -1,0 +1,29 @@
+{% extends "binders/base.html" %}
+
+{% block content %}
+<h2><b>Documentation Dashboard</b></h2>
+    {% for repo, doc in repo_doc_details.items() %}
+        <h3><b>{{ repo[0] }}</b></h3>
+        <ul>
+            <li>Owner: {{ repo[1] }}</li>
+            <li>Language: {{ repo[2] }}</li>
+            <li>Last Updated: {{ repo[3] }}</li>
+            <li>Repository URL: <a href={{ repo[4] }} target="_blank">{{ repo[4] }}</a></li>
+            <li>Branch: {{ repo[5] }}</li>
+            <li>Documentations:</li>
+                {% for doc_name, doc_type, doc_html_location in doc %}
+                    <ul>
+                        <li>{{ doc_name }}</li>
+                        <ul>
+                            <li>Type: {{ doc_type }}</li>
+                            <li>URL: <a href={{ doc_html_location }} target="_blank">{{ doc_html_location }}</a></li>
+                        </ul>
+                    </ul>
+                {%  endfor %}
+        </ul>
+    {%  endfor %}
+
+    <div id="dashboard-container"></div>
+    <script type="text/javascript" src="/static/assets/dist/dashboard.bundle.js" charset="utf-8"></script>
+{% endblock %}
+

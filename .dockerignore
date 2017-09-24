@@ -1,0 +1,5 @@
+.tox/
+results/
+**/*.pyc
+**/__pycache__
+repos/

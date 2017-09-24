@@ -1,0 +1,8 @@
+recursive-include binders/templates *
+recursive-include binders/static *
+recursive-exclude binders/static/docs *
+recursive-exclude binders/static/spec *
+recursive-exclude binders/static/assets/node_modules *
+recursive-exclude tests *
+recursive-exclude repos *
+recursive-include binders/migrations *

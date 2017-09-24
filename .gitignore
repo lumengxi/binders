@@ -1,0 +1,42 @@
+*.pyc
+yarn-error.log
+_modules
+binders/assets/coverage/*
+changelog.sh
+.DS_Store
+.coverage
+_build
+_static
+_images
+_modules
+binders/bin/bindersc
+env_py3
+.eggs
+build
+*.db
+tmp
+binders_config.py
+local_config.py
+env
+dist
+binders.egg-info/
+*.bak
+.idea
+*.sqllite
+.vscode
+.python-version
+
+# Node.js, webpack artifacts
+*.entry.js
+node_modules
+npm-debug.log
+yarn.lock
+binders/assets/version_info.json
+
+# IntelliJ
+*.iml
+
+# Local dev
+app.db
+repos/
+.tox/
