@@ -27,17 +27,21 @@ def get_active_repo_docs():
 
 
 def get_repo_doc_details():
-    active_repos = db.session\
-        .query(Repository, RepositoryOwner, RepositoryLang, Documentation, DocumentationType)\
-        .filter(Documentation.is_active == true())\
+    repo_details = db.session\
+        .query(Repository.name,
+               str(Repository.updated_at),
+               RepositoryOwner.name,
+               RepositoryLang.name,
+               Documentation.name,
+               Documentation.is_active,
+               DocumentationType.name)\
+        .join(RepositoryOwner)\
+        .join(RepositoryLang)\
+        .outerjoin(Documentation)\
+        .outerjoin(DocumentationType)\
         .all()
 
-    repo_docs = defaultdict(list)
-    for repo, repo_owner, repo_lang, doc, doc_type in active_repos:
-        repo_docs[(repo.name, repo_owner.name, repo_lang.name, str(repo.updated_at), repo.url, repo.branch)].append(
-            (doc.name, doc_type.name, doc.doc_html_location))
-
-    return repo_docs
+    return repo_details
 
 
 def get_dest_dir(repo_name, repo_branch):
